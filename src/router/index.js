@@ -1,17 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const user = require("./user");
 
-router.use('/user',function(){
+router.use("/user", user);
 
-});
+router.use("/menu", function() {});
 
-router.use('/menu',function(){
-
-});
-
-router.use('/store', function(){
-
-});
-
+router.use("/store", function() {});
 
 module.exports = router;
