@@ -10,20 +10,25 @@ module.exports = {
       const { isID, isPW, isAdmin } = req.body;
 
       const check = async data => {
-        const { loginId, password, admin, nickname } = data.dataValues;
-
-        if (!loginId) {
+        if (!data) {
           res.send(false);
         } else {
-          if (user.pwCheck(isPW, password, isAdmin, admin)) {
-            const token = await user.token(nickname, admin);
-            res.send({ message: true, token });
-          } else {
+          const { loginId, password, admin, nickname } = data.dataValues;
+
+          if (!loginId) {
             res.send(false);
+          } else {
+            let check = await user.pwCheck(isPW, password, isAdmin, admin);
+
+            if (check) {
+              const token = await user.token(nickname, admin);
+              res.send({ message: nickname, admin, token });
+            } else {
+              res.send(false);
+            }
           }
         }
       };
-      console.log(isID);
       models.users.findOne({ where: { loginId: isID } }).then(check);
     }
   },
