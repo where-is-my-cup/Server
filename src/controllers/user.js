@@ -29,14 +29,14 @@ module.exports = {
           }
         }
       };
-      models.users.findOne({ where: { loginId: isID } }).then(check);
+      models.user.findOne({ where: { loginId: isID } }).then(check);
     }
   },
   checkID: {
     post: async (req, res) => {
       const checkID = req.body.id;
 
-      const result = await models.users.findOne({ where: { loginId: checkID } });
+      const result = await models.user.findOne({ where: { loginId: checkID } });
 
       !!result ? res.send(true) : res.send(false);
     }
@@ -45,7 +45,7 @@ module.exports = {
     post: async (req, res) => {
       const checkNN = req.body.nickname;
 
-      const result = await models.users.findOne({ where: { nickname: checkNN } });
+      const result = await models.user.findOne({ where: { nickname: checkNN } });
 
       !!result ? res.send(false) : res.send(true);
     }
@@ -59,7 +59,7 @@ module.exports = {
         .pbkdf2(pw, salt, 100000, 64, "sha512")
         .catch(err => console.log(err));
       result = result.toString("base64");
-      await models.users
+      await models.user
         .create({ loginId: id, password: result, nickname: nickname, admin: admin })
         .then(result => {
           res.send(result);
