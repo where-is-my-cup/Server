@@ -22,7 +22,7 @@ module.exports = {
             console.log(check);
             if (check) {
               const token = await user.token(nickname, admin, loginId, storeId);
-              res.send({ check, nickname, admin, token, loginId });
+              res.send({ check, nickname, admin, token, loginId, storeId });
             } else {
               res.json(false);
             }
