@@ -10,8 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   store_user.associate = function(models) {
-    // associations can be defined here
-    store_user.hasMany(models.store, {
+    models.store_user.belongsTo(models.store, {
       foreignKey: "id"
     });
   };
