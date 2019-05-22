@@ -18,10 +18,11 @@ module.exports = {
           if (!loginId) {
             res.json(false);
           } else {
-            let check = await user.pwCheck(isPW, password, isAdmin, admin, loginId);
+            let check = await user.pwCheck(isPW, password, isAdmin, admin);
+            console.log(check);
             if (check) {
               const token = await user.token(nickname, admin, loginId, storeId);
-              res.send({ message: nickname, admin, token });
+              res.send({ check, nickname, admin, token, loginId });
             } else {
               res.json(false);
             }
@@ -52,7 +53,7 @@ module.exports = {
   signUp: {
     post: async (req, res) => {
       const { id, pw, nickname } = req.body;
-      const admin = "false";
+      const admin = false;
       crypto.pbkdf2 = util.promisify(crypto.pbkdf2);
       let result = await crypto
         .pbkdf2(pw, salt, 100000, 64, "sha512")
