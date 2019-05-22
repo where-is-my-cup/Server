@@ -14,7 +14,7 @@ module.exports = {
           res.json(false);
         } else {
           const { loginId, password, admin, nickname, storeId } = data.dataValues;
-
+          console.log("admin", admin);
           if (!loginId) {
             res.json(false);
           } else {
