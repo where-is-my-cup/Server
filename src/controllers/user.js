@@ -11,20 +11,19 @@ module.exports = {
 
       const check = async data => {
         if (!data) {
-          res.send(false);
+          res.json(false);
         } else {
-          const { loginId, password, admin, nickname } = data.dataValues;
+          const { loginId, password, admin, nickname, storeId } = data.dataValues;
 
           if (!loginId) {
-            res.send(false);
+            res.json(false);
           } else {
-            let check = await user.pwCheck(isPW, password, isAdmin, admin);
-
+            let check = await user.pwCheck(isPW, password, isAdmin, admin, loginId);
             if (check) {
-              const token = await user.token(nickname, admin);
+              const token = await user.token(nickname, admin, loginId, storeId);
               res.send({ message: nickname, admin, token });
             } else {
-              res.send(false);
+              res.json(false);
             }
           }
         }

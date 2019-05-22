@@ -1,12 +1,14 @@
 const jwt = require("jsonwebtoken");
 const { salt } = require("../../../secret/secret");
 
-const token = (nickname, admin) => {
+const token = (nickname, admin, loginId, storeId) => {
   return new Promise((resolve, reject) => {
     jwt.sign(
       {
         nickname,
-        admin
+        admin,
+        loginId,
+        storeId
       },
       salt,
       {
