@@ -14,12 +14,10 @@ module.exports = {
           res.json(false);
         } else {
           const { loginId, password, admin, nickname, storeId } = data.dataValues;
-          console.log("admin", admin);
           if (!loginId) {
             res.json(false);
           } else {
             let check = await user.pwCheck(isPW, password, isAdmin, admin);
-            console.log(check);
             if (check) {
               const token = await user.token(nickname, admin, loginId, storeId);
               res.send({ check, nickname, admin, token, loginId, storeId });
