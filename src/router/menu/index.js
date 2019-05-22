@@ -3,8 +3,8 @@ const router = express.Router();
 const controller = require("../../controllers/menu");
 
 router.get("/menulist", controller.menuList);
-
 router.get("/menulistAll", controller.menuListAll);
 router.get("/storelist", controller.storeList);
+router.get("/storelistAll", controller.storeListAll);
 
 module.exports = router;

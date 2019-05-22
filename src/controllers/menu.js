@@ -19,7 +19,7 @@ module.exports = {
     response.json(menulist);
   },
   storeList: async (request, response) => {
-    var user_id = 2;
+    var user_id = request.query.userId;
     let storeList = await models.store_user.findAll({
       include: [
         {
@@ -28,6 +28,10 @@ module.exports = {
       ],
       where: { user_id: user_id }
     });
+    response.json(storeList);
+  },
+  storeListAll: async (request, response) => {
+    let storeList = await models.store.findAll();
     response.json(storeList);
   }
 };
