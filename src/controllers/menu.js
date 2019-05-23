@@ -60,6 +60,11 @@ module.exports = {
       createdAt: today.getDate(),
       updatedAt: today.getDate()
     };
-    await models.store_user.create(newdata);
+    var store = await models.store_user.findAll({
+      where: { store_id: storeId }
+    });
+    if (store.length === 0) {
+      await models.store_user.create(newdata);
+    }
   }
 };
