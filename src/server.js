@@ -24,9 +24,7 @@ app.io.on("connection", function(socket) {
   /* 주문 들어오는 부분 */
   socket.on("ordering", function(data) {
     socket.join("room_" + data.storeId);
-    console.log(data.orderList[0].selectMenu);
     app.io.to(store[data.storeId]).emit("ordering", data);
-    app.io.emit("test", "tttt");
   });
 
   /* 주문 처리하는 부분 */
