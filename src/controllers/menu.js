@@ -11,15 +11,6 @@ module.exports = {
       if (!err) response.json(rows);
       else console.log("Error while performing Query.", err);
     });
-    /* let menuList = await models.store_menu.findAll({
-      include: [
-        {
-          model: models.menu
-        }
-      ],
-      where: { store_id: store_id }
-    });
-    response.json(menuList); */
   },
   menuListAll: async (request, response) => {
     let menulist = await models.menu.findAll();
@@ -34,17 +25,6 @@ module.exports = {
       if (!err) response.json(rows);
       else console.log("Error while performing Query.", err);
     });
-
-    /* let storeList = await models.store_user.findAll({
-      include: [
-        {
-          model: models.store,
-          required: false
-        }
-      ],
-      where: { user_id: user_id }
-    }); 
-    response.json(storeList);*/
   },
   storeListAll: async (request, response) => {
     let storeList = await models.store.findAll();
