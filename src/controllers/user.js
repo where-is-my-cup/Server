@@ -13,7 +13,13 @@ module.exports = {
         if (!data) {
           res.json(false);
         } else {
-          const { loginId, password, admin, nickname, storeId } = data.dataValues;
+          const {
+            loginId,
+            password,
+            admin,
+            nickname,
+            storeId
+          } = data.dataValues;
           if (!loginId) {
             res.json(false);
           } else {
@@ -43,7 +49,9 @@ module.exports = {
     post: async (req, res) => {
       const checkNN = req.body.nickname;
 
-      const result = await models.user.findOne({ where: { nickname: checkNN } });
+      const result = await models.user.findOne({
+        where: { nickname: checkNN }
+      });
 
       !!result ? res.send(false) : res.send(true);
     }
@@ -58,7 +66,12 @@ module.exports = {
         .catch(err => console.log(err));
       result = result.toString("base64");
       await models.user
-        .create({ loginId: id, password: result, nickname: nickname, admin: admin })
+        .create({
+          loginId: id,
+          password: result,
+          nickname: nickname,
+          admin: admin
+        })
         .then(result => {
           res.send(result);
         });
