@@ -40,6 +40,21 @@ module.exports = {
       createdAt: today.getDate(),
       updatedAt: today.getDate()
     };
+    var orders = {};
+    for (var menu2 of orderList) {
+      var menu = JSON.parse(menu2);
+      var menuId = menu.selectMenu.menu_id;
+      var storId = menu.storeId;
+      var count = menu.selectMenu.count - menu.count;
+
+      await models.store_menu.update(
+        { count: count },
+        {
+          where: { menu_id: menuId, store_id: storId }
+        }
+      );
+    }
+
     var store = await models.store_user.findAll({
       where: { store_id: storeId }
     });
