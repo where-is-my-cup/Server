@@ -18,7 +18,7 @@ app.io.on("connection", function(socket) {
   /* 매장 로그인 부분 */
   socket.on("storeLogin", function(data) {
     socket.join("room_" + data.storeId);
-    store[data.storeId] = data.storeSocketId;
+    store[data.storeId] = socket.id;
   });
 
   /* 주문 들어오는 부분 */
@@ -29,12 +29,13 @@ app.io.on("connection", function(socket) {
 
   /* 주문 처리하는 부분 */
   socket.on("completedOrder", function(data) {
-    //app.io.to(data.user_socketId).emit("completedOrder", true);
-    app.io.emit("completedOrder", "true");
+    app.io.to(data.user_socketId).emit("completedOrder", true);
   });
   /* 각 손님에게 대기번호 알려주는 부분 */
   socket.on("waiting", function(data) {
-    app.io.sockets.in("room_" + data.storeId).emit("waiting", data.waiting);
+    app.io.sockets
+      .in("room_" + data.storeId)
+      .emit("waiting", data.waitingNames);
   });
   /* Room 나가는 부분 */
   socket.on("leaveRoom", function(data) {
