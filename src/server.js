@@ -45,9 +45,7 @@ app.io.on("connection", function(socket) {
   });
   /* 각 손님에게 대기번호 알려주는 부분 */
   socket.on("waiting", function(data) {
-    app.io.sockets
-      .in("room_" + data.storeId)
-      .emit("waiting", data.waitingNames);
+    app.io.sockets.in("room_" + data.storeId).emit("waiting", data.waitingNames);
   });
   /* Room 나가는 부분 */
   socket.on("leaveRoom", function(data) {
