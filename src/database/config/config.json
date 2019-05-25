@@ -1,10 +1,11 @@
 {
   "development": {
-    "username": "root",
-    "password": "jayajung!",
-    "database": "cupholder",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "nudge411",
+    "password": "klmhat32hx",
+    "database": "database_cupholder",
+    "host": "where-is-my-cup2.cr1lyo5ykzvi.us-east-2.rds.amazonaws.com",
+    "dialect": "mysql",
+    "port": 30226
   },
   "test": {
     "username": "root",

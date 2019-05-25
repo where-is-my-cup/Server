@@ -50,7 +50,7 @@ app.io.on("connection", function(socket) {
 var server = http.createServer(app);
 app.io.attach(server);
 
-server.listen(3001, "localhost", () => {
+server.listen(3001, () => {
   console.log("Start Server");
 });
 
