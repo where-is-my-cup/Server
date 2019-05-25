@@ -45,7 +45,9 @@ app.io.on("connection", function(socket) {
   });
   /* 각 손님에게 대기번호 알려주는 부분 */
   socket.on("waiting", function(data) {
-    app.io.sockets.in("room_" + data.storeId).emit("waiting", data.waitingNames);
+    app.io.sockets
+      .in("room_" + data.storeId)
+      .emit("waiting", data.waitingNames);
   });
   /* Room 나가는 부분 */
   socket.on("leaveRoom", function(data) {
@@ -56,7 +58,7 @@ app.io.on("connection", function(socket) {
 var server = http.createServer(app);
 app.io.attach(server);
 
-server.listen(3001, "localhost", () => {
+server.listen(3001, () => {
   console.log("Start Server");
 });
 
