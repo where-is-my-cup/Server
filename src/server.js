@@ -15,6 +15,18 @@ const store = {};
 app.io.on("connection", function(socket) {
   console.log("socket start");
 
+  socket.on("checkStore", function(data) {
+    for (var key in store) {
+      if (key === data.storeId + "") {
+        app.io
+          .to(socket.id)
+          .emit("GoStore", { flag: true, storeId: data.storeId });
+        return;
+      }
+    }
+    app.io.to(socket.id).emit("GoStore", { flag: false });
+  });
+
   /* 매장 로그인 부분 */
   socket.on("storeLogin", function(data) {
     socket.join("room_" + data.storeId);
