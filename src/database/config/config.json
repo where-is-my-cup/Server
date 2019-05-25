@@ -2,8 +2,8 @@
   "development": {
     "username": "nudge411",
     "password": "klmhat32hx",
-    "database": "database_cupholder",
-    "host": "where-is-my-cup2.cr1lyo5ykzvi.us-east-2.rds.amazonaws.com",
+    "database": "nudge411",
+    "host": "cupholder.cnetgtmn8zrm.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",
     "port": 30226
   },
