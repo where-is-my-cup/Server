@@ -15,6 +15,18 @@ const store = {};
 app.io.on("connection", function(socket) {
   console.log("socket start");
 
+  socket.on("checkStore", function(data) {
+    for (var key in store) {
+      if (key === data.storeId + "") {
+        app.io
+          .to(socket.id)
+          .emit("GoStore", { flag: true, storeId: data.storeId });
+        return;
+      }
+    }
+    app.io.to(socket.id).emit("GoStore", { flag: false });
+  });
+
   /* 매장 로그인 부분 */
   socket.on("storeLogin", function(data) {
     socket.join("room_" + data.storeId);
@@ -33,9 +45,7 @@ app.io.on("connection", function(socket) {
   });
   /* 각 손님에게 대기번호 알려주는 부분 */
   socket.on("waiting", function(data) {
-    app.io.sockets
-      .in("room_" + data.storeId)
-      .emit("waiting", data.waitingNames);
+    app.io.sockets.in("room_" + data.storeId).emit("waiting", data.waitingNames);
   });
   /* Room 나가는 부분 */
   socket.on("leaveRoom", function(data) {
