@@ -54,9 +54,8 @@ module.exports = {
         }
       );
     }
-
     var store = await models.store_user.findAll({
-      where: { store_id: storeId }
+      where: { store_id: storeId, user_id: userId }
     });
     if (store.length === 0) {
       await models.store_user.create(newdata);
